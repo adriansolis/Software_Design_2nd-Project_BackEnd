@@ -38,7 +38,7 @@ var db  = mysql.createPool({
 app.get('/',(req,res) => {
     res.render("index");
 });
-/*ENDPOINTS PARA VER LUGARES*/
+
 app.get('/Provincias',(req,res) => {
   let sql = 'select * from provincia ';
   let query = db.query(sql,(err,result) => {
@@ -63,7 +63,7 @@ app.get('/Distritos',(req,res)=>{
   });
 });
 
-// ENDPOINT PARA CARGAR LUGARES REGISTRADOS
+//CARGAR LUGARES REGISTRADOS
 app.get('/Lugares',(req,res) => {
   let sql = 'CALL sp_cargarLugares();';
   let query = db.query(sql, (err, result) => {
@@ -72,7 +72,7 @@ app.get('/Lugares',(req,res) => {
   });
 });
 
-// ENDPOINT PARA TODOS LOS PRODUCTOS
+//TODOS LOS PRODUCTOS
 app.get('/Productos',(req,res) => {
   let sql = `CALL sp_cargarProductos();`;
   let query = db.query(sql, (err, result) => {
@@ -81,7 +81,7 @@ app.get('/Productos',(req,res) => {
   });
 });
 
-// ENDPOINT PARA LOS PRODUCTOS DISPONIBLES
+// PRODUCTOS DISPONIBLES
 app.get('/ProductosDisponibles',(req,res) => {
   let sql = `CALL sp_cargarProductosDisponibles();`;
   let query = db.query(sql, (err, result) => {
@@ -90,7 +90,7 @@ app.get('/ProductosDisponibles',(req,res) => {
   });
 });
 
-//ENDPOINT PARA VENDEDORES
+//VENDEDORES
 app.get('/Vendedores',(req,res) => {
   let sql = `CALL sp_cargarVendedores();`;
   let query = db.query(sql, (err, result) => {
@@ -99,7 +99,7 @@ app.get('/Vendedores',(req,res) => {
   });
 });
 
-// ENDPOINT PARA MARCAS
+//MARCAS
 app.get('/Marcas',(req,res) => {
   let sql = 'CALL sp_cargarMarcas();';
   let query = db.query(sql, (err, result) => {
@@ -217,6 +217,9 @@ app.post('/decidirVendedor', (req,res) => {
       return true;
   });
 });
+
+
+// INICIAR SERVIDOR
 
 app.listen(process.env.PORT || 3000, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
